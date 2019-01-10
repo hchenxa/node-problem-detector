@@ -156,7 +156,8 @@ For example, to test [KernelMonitor](https://github.com/kubernetes/node-problem-
 
 **Note**:
 - You can see more rule examples under [test/kernel_log_generator/problems](https://github.com/kubernetes/node-problem-detector/tree/master/test/kernel_log_generator/problems).
-- For [KernelMonitor](https://github.com/kubernetes/node-problem-detector/blob/master/config/kernel-monitor.json) message injection, all messages should have ```kernel: ``` prefix (also note there is a space after ```:```).
+- For [KernelMonitor](https://github.com/kubernetes/node-problem-detector/blob/master/config/kernel-monitor.json) message injection, all messages should have ```kernel: ``` prefix (also note there is a space after ```:```); or use [generator.sh](https://github.com/kubernetes/node-problem-detector/blob/master/test/kernel_log_generator/generator.sh).
+- To inject other logs into journald like systemd logs, use ```echo 'Some systemd message' | systemd-cat -t systemd```.
 
 # Remedy Systems
 
@@ -165,7 +166,7 @@ detected by the node-problem-detector. Remedy systems observe events and/or node
 conditions emitted by the node-problem-detector and take action to return the
 Kubernetes cluster to a healthy state. The following remedy systems exist:
 
-* [**Draino**](https://github.com/negz/draino) automatically drains Kubernetes
+* [**Draino**](https://github.com/planetlabs/draino) automatically drains Kubernetes
   nodes based on labels and node conditions. Nodes that match _all_ of the supplied
   labels and _any_ of the supplied node conditions will be prevented from accepting
   new pods (aka 'cordoned') immediately, and
@@ -175,6 +176,10 @@ Kubernetes cluster to a healthy state. The following remedy systems exist:
   to automatically terminate drained nodes. Refer to
   [this issue](https://github.com/kubernetes/node-problem-detector/issues/199)
   for an example production use case for Draino.
+
+# Docs
+
+* [Custom plugin monitor](docs/custom_plugin_monitor.md)
 
 # Links
 
